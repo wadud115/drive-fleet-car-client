@@ -2,6 +2,7 @@
 
 import { Button, Card } from '@heroui/react';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 const ExploreCarsPage = ({car}) => {
@@ -15,7 +16,8 @@ const{   name,
     availability,
     imageUrl,
     pickupLocation,
-    description
+    description,
+    _id
 }  = car;
 
 
@@ -81,9 +83,11 @@ const{   name,
                 <span> Location : {pickupLocation}</span>
               </div>
 
+              <Link href={`/cars/${_id}`}>
               <Button className="w-full bg-blue-600 text-white">
                 View Details
               </Button>
+              </Link>
 
             </div>
           </Card>
