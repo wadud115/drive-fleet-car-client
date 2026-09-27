@@ -17,7 +17,6 @@ const Footer = () => {
         {/* Main Footer */}
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
 
-          {/* Logo & Description */}
           <div>
             <h2 className="text-2xl font-bold">
               Car<span className="text-blue-500">Rent</span>
@@ -28,7 +27,7 @@ const Footer = () => {
               safe and affordable journey with us.
             </p>
 
-            {/* Social Icons */}
+         
             <div className="mt-6 flex gap-3">
 
               <a
@@ -55,7 +54,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Useful Links */}
+  
           <div>
             <h3 className="mb-5 text-lg font-semibold">
               Useful Links
@@ -102,7 +101,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Services */}
+        
           <div>
             <h3 className="mb-5 text-lg font-semibold">
               Services
@@ -118,7 +117,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact Information */}
+     
           <div>
             <h3 className="mb-5 text-lg font-semibold">
               Contact Us
@@ -167,7 +166,7 @@ const Footer = () => {
 
         </div>
 
-        {/* Bottom Footer */}
+
         <div className="mt-10 border-t border-gray-800 pt-6">
 
           <div className="flex flex-col items-center justify-between gap-4 text-sm text-gray-500 md:flex-row">

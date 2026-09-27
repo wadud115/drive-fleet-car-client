@@ -24,7 +24,7 @@ const Navbar = () => {
           Car<span className="text-blue-600">Rent</span>
         </Link>
 
-        {/* Desktop Navigation */}
+    
         <div className="hidden items-center gap-8 md:flex">
 
           <Link
@@ -41,7 +41,7 @@ const Navbar = () => {
             Explore Cars
           </Link>
 
-          {/* Add Car */}
+     
           <Link
             href="/add-car"
             className="font-medium text-gray-700 transition hover:text-blue-600"
@@ -49,7 +49,7 @@ const Navbar = () => {
             Add Car
           </Link>
 
-          {/* My Bookings */}
+  
           <Link
             href="/my-bookings"
             className="font-medium text-gray-700 transition hover:text-blue-600"
@@ -57,9 +57,6 @@ const Navbar = () => {
             My Bookings
           </Link>
 
-          {/* ============================= */}
-          {/* Authentication Section */}
-          {/* ============================= */}
 
           {isLoggedIn ? (
             /* Logged In */
@@ -67,7 +64,7 @@ const Navbar = () => {
 
               <button className="flex items-center gap-2 rounded-lg px-3 py-2 transition hover:bg-gray-100">
 
-                {/* User Image */}
+          
                 <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 text-blue-600">
                   <User size={18} />
                 </div>
@@ -79,18 +76,16 @@ const Navbar = () => {
                 <ChevronDown size={16} />
               </button>
 
-              {/* Dropdown */}
               <div className="invisible absolute right-0 top-12 z-50 w-48 rounded-lg border bg-white py-2 opacity-0 shadow-lg transition-all duration-200 group-hover:visible group-hover:opacity-100">
 
-                {/* Add Car */}
-                <Link
+                    <Link
                   href="/add-car"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   Add Car
                 </Link>
 
-                {/* My Bookings */}
+             
                 <Link
                   href="/my-bookings"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -98,7 +93,6 @@ const Navbar = () => {
                   My Bookings
                 </Link>
 
-                {/* My Added Cars */}
                 <Link
                   href="/my-added-cars"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -108,11 +102,10 @@ const Navbar = () => {
 
                 <hr className="my-2" />
 
-                {/* Logout */}
                 <button
                   className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50"
                   
-                  // onClick={logout}
+                  
                 >
                   Logout
                 </button>
@@ -121,10 +114,7 @@ const Navbar = () => {
             </div>
 
           ) : (
-            /* ============================= */
-            /* Not Logged In */
-            /* ============================= */
-
+          
             <Link
               href="/login"
               className="rounded-lg bg-blue-600 px-5 py-2.5 font-medium text-white transition hover:bg-blue-700"
@@ -135,7 +125,7 @@ const Navbar = () => {
 
         </div>
 
-        {/* Mobile Menu Button */}
+      
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="rounded-lg p-2 hover:bg-gray-100 md:hidden"
@@ -145,9 +135,6 @@ const Navbar = () => {
 
       </div>
 
-      {/* ============================= */}
-      {/* Mobile Menu */}
-      {/* ============================= */}
 
       {isMenuOpen && (
         <div className="border-t bg-white px-6 py-4 md:hidden">
@@ -186,10 +173,7 @@ const Navbar = () => {
               My Bookings
             </Link>
 
-            {/* ============================= */}
-            {/* Mobile Authentication */}
-            {/* ============================= */}
-
+            
             {isLoggedIn ? (
               <div className="border-t pt-4">
 
@@ -231,7 +215,7 @@ const Navbar = () => {
                   <button
                     className="text-left text-sm text-red-600"
                     
-                    // onClick={logout}
+
                   >
                     Logout
                   </button>
