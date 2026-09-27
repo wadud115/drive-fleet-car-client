@@ -1,188 +1,297 @@
 "use client";
 
 import {
-  Input,
-  TextArea,
   Button,
+  FieldError,
+  Input,
+  Label,
+  ListBox,
+  TextArea,
+  TextField,
+  Select,
+  Card,
 } from "@heroui/react";
+
 const AddCarPage = () => {
+
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+
+    const carData = Object.fromEntries(formData.entries());
+
+    console.log(carData);
+
+
+    const res = await fetch("http://localhost:5000/cars" , {
+        method: "POST",
+        headers : {
+            'content-type' : 'application/json'
+        },
+
+        body: JSON.stringify(carData)
+    })
+
+    const data = await res.json()
+
+    console.log(data)
+
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 px-4 py-10 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-3xl">
+    <div className="mx-auto max-w-7xl p-5">
+
+
+      <h2 className="mb-5 text-2xl font-bold">
+        Add Car
+      </h2>
+
+      <Card className="w-full p-3">
+
+        <form
+          onSubmit={onSubmit}
+          className="space-y-8 p-5 sm:p-10"
+        >
+
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+
+            <div className="md:col-span-2">
+              <TextField
+                name="name"
+                isRequired
+              >
+                <Label>Car Name</Label>
+
+                <Input
+                  placeholder="Toyota Corolla"
+                  className="rounded-2xl"
+                />
+
+                <FieldError />
+              </TextField>
+            </div>
+
+
+            
+            <TextField
+              name="price"
+              type="number"
+              isRequired
+            >
+              <Label>Daily Rent Price (USD)</Label>
+
+              <Input
+                type="number"
+                placeholder="80"
+                className="rounded-2xl"
+              />
+
+              <FieldError />
+            </TextField>
+
+
+      
+            <TextField
+              name="seat"
+              type="number"
+              isRequired
+            >
+              <Label>Seat Capacity</Label>
+
+              <Input
+                type="number"
+                placeholder="5"
+                className="rounded-2xl"
+              />
+
+              <FieldError />
+            </TextField>
+
+
+    
+            <div>
+              <Select
+                name="type"
+                isRequired
+                className="w-full"
+                placeholder="Select car type"
+              >
+                <Label>Car Type</Label>
+
+                <Select.Trigger className="rounded-2xl">
+                  <Select.Value />
+                  <Select.Indicator />
+                </Select.Trigger>
+
+                <Select.Popover>
+                  <ListBox>
+
+                    <ListBox.Item
+                      id="SUV"
+                      textValue="SUV"
+                    >
+                      SUV
+                      <ListBox.ItemIndicator />
+                    </ListBox.Item>
+
+                    <ListBox.Item
+                      id="Sedan"
+                      textValue="Sedan"
+                    >
+                      Sedan
+                      <ListBox.ItemIndicator />
+                    </ListBox.Item>
+
+                    <ListBox.Item
+                      id="Hatchback"
+                      textValue="Hatchback"
+                    >
+                      Hatchback
+                      <ListBox.ItemIndicator />
+                    </ListBox.Item>
+
+                    <ListBox.Item
+                      id="Luxury"
+                      textValue="Luxury"
+                    >
+                      Luxury
+                      <ListBox.ItemIndicator />
+                    </ListBox.Item>
+
+                    <ListBox.Item
+                      id="Coupe"
+                      textValue="Coupe"
+                    >
+                      Coupe
+                      <ListBox.ItemIndicator />
+                    </ListBox.Item>
+
+                    <ListBox.Item
+                      id="Van"
+                      textValue="Van"
+                    >
+                      Van
+                      <ListBox.ItemIndicator />
+                    </ListBox.Item>
+
+                  </ListBox>
+                </Select.Popover>
+              </Select>
+            </div>
+
 
        
-        <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold text-gray-900">
-            Add a Car
-          </h1>
+            <div>
+              <Select
+                name="availability"
+                isRequired
+                className="w-full"
+                placeholder="Select availability"
+              >
+                <Label>Availability Status</Label>
 
-          <p className="mt-2 text-gray-600">
-            Add your car details to make it available for rental.
-          </p>
-        </div>
+                <Select.Trigger className="rounded-2xl">
+                  <Select.Value />
+                  <Select.Indicator />
+                </Select.Trigger>
 
-    
-        <div className="rounded-2xl bg-white p-5 shadow-md sm:p-8">
+                <Select.Popover>
+                  <ListBox>
 
-        <form className="space-y-6">
+                    <ListBox.Item
+                      id="Available"
+                      textValue="Available"
+                    >
+                      Available
+                      <ListBox.ItemIndicator />
+                    </ListBox.Item>
 
+                    <ListBox.Item
+                      id="Unavailable"
+                      textValue="Unavailable"
+                    >
+                      Unavailable
+                      <ListBox.ItemIndicator />
+                    </ListBox.Item>
 
-  <div>
-    <label className="mb-2 block text-sm font-medium text-gray-700">
-      Car Name
-    </label>
+                  </ListBox>
+                </Select.Popover>
+              </Select>
+            </div>
 
-    <Input
-      name="carName"
-      placeholder="Enter car name"
-      isRequired
-      className={'w-full'}
-    />
-  </div>
-
-
-  <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-
-    <div>
-      <label className="mb-2 block text-sm font-medium text-gray-700">
-        Daily Rent Price
-      </label>
-
-      <Input
-        name="rentPrice"
-        type="number"
-        placeholder="Enter daily rent"
-        startContent={
-          <span className="text-gray-500">$</span>
-        }
-        isRequired
-      />
-    </div>
-
-    <div>
-      <label className="mb-2 block text-sm font-medium text-gray-700">
-        Seat Capacity
-      </label>
-
-      <Input
-        name="seatCapacity"
-        type="number"
-        placeholder="e.g. 5"
-        isRequired
-      />
-    </div>
-
-  </div>
-
-  <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
 
    
-    <div>
-      <label className="mb-2 block text-sm font-medium text-gray-700">
-        Car Type
-      </label>
+            <div className="md:col-span-2">
+              <TextField
+                name="imageUrl"
+                type="url"
+                isRequired
+              >
+                <Label>Image URL</Label>
 
-      <select
-        name="carType"
-        className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm outline-none focus:border-blue-500"
-        required
-        defaultValue=""
-      >
-        <option value="" disabled>
-          Select car type
-        </option>
+                <Input
+                  type="url"
+                  placeholder="https://example.com/car.jpg"
+                  className="rounded-2xl"
+                />
 
-        <option value="suv">SUV</option>
-        <option value="sedan">Sedan</option>
-        <option value="hatchback">Hatchback</option>
-        <option value="luxury">Luxury</option>
-        <option value="coupe">Coupe</option>
-        <option value="van">Van</option>
-      </select>
-    </div>
+                <FieldError />
+              </TextField>
+            </div>
 
 
-    <div>
-      <label className="mb-2 block text-sm font-medium text-gray-700">
-        Availability Status
-      </label>
+            <div className="md:col-span-2">
+              <TextField
+                name="pickupLocation"
+                isRequired
+              >
+                <Label>Pickup Location</Label>
 
-      <select
-        name="availability"
-        className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm outline-none focus:border-blue-500"
-        required
-        defaultValue=""
-      >
-        <option value="" disabled>
-          Select availability
-        </option>
+                <Input
+                  placeholder="Dhaka, Bangladesh"
+                  className="rounded-2xl"
+                />
 
-        <option value="available">Available</option>
-        <option value="unavailable">Unavailable</option>
-      </select>
-    </div>
-
-  </div>
-
-<div className="flex justify-between ">
-
-   
-  <div className="w-1/2">
-    <label className="mb-2 block text-sm font-medium text-gray-700">
-      Image URL
-    </label>
-
-    <Input
-      name="imageUrl"
-      type="url"
-      placeholder="Enter Your image URL"
-      isRequired
-    />
-
-    
-  </div>
-
-  <div  className="w-1/2">
-    <label className="mb-2 block text-sm font-medium text-gray-700">
-      Pickup Location
-    </label>
-
-    <Input
-      name="pickupLocation"
-      placeholder="Enter pickup location"
-      isRequired
-    />
-  </div>
-</div>
+                <FieldError />
+              </TextField>
+            </div>
 
 
-  <div>
-    <label className="mb-2 block text-sm font-medium text-gray-700">
-      Description
-    </label>
+            <div className="md:col-span-2">
+              <TextField
+                name="description"
+                isRequired
+              >
+                <Label>Description</Label>
 
-    <TextArea
-      name="description"
-      placeholder="Write something about the car..."
-      minRows={5}
-      isRequired
-       className={'w-full'}
-    />
-  </div>
+                <TextArea
+                  placeholder="Describe the car..."
+                  className="rounded-3xl"
+                />
 
-  {/* Submit */}
-  <Button
-    type="submit"
-    color="primary"
-    size="lg"
-    className="w-full font-semibold"
-  >
-    Add Car
-  </Button>
+                <FieldError />
+              </TextField>
+            </div>
 
-</form>
-        </div>
-      </div>
+          </div>
+
+
+       
+          <Button
+            type="submit"
+            variant="outline"
+            className=" w-full bg-blue-500 text-white flex items-center"
+            
+          >
+            Add Car
+          </Button>
+
+        </form>
+
+      </Card>
+
     </div>
   );
 };
