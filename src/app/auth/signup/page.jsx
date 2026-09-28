@@ -1,20 +1,47 @@
 'use client'
 
+import { authClient } from '@/lib/auth-client';
 import { Button, Card, Description, FieldError, Form, Input, Label, Separator, TextField } from '@heroui/react';
 
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import React from 'react';
 import { FcGoogle } from 'react-icons/fc';
 
 const RegisterPage = () => {
 
-    const onSubmit = (e)=>{
+
+    
+        const handleGoogleLogIn = async()=>{
+    
+        await authClient.signIn.social({
+            provider: 'google'
+    
+        }) 
+    }
+
+    const onSubmit = async(e)=>{
         e.preventDefault();
 
 
         const formData = new FormData(e.currentTarget)
         const user =  Object.fromEntries(formData.entries())
         console.log(user)
+
+
+ const { data, error } = await authClient.signUp.email({
+    name : user.name, 
+    email : user.email, 
+    password : user.password, 
+    imageUrl : user.imageUrl, 
+    
+});
+
+     console.log({data, error})
+
+     if(data){
+        redirect('/auth/login')
+     }
 
     }
     return (
@@ -124,7 +151,7 @@ const RegisterPage = () => {
                      </div>
             
                      <div>
-                        <Button variant='outline' className={" w-full"}> <FcGoogle /> Sign Up With Google</Button>
+                        <Button onClick={ handleGoogleLogIn} variant='outline' className={" w-full"}> <FcGoogle /> Sign Up With Google</Button>
             
                      </div>
                      </div>
