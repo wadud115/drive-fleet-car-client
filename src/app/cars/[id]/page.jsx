@@ -1,4 +1,5 @@
 import { DeleteCar } from "@/components/DeleteCar";
+import { UpdateCarPage } from "@/components/UpdateCar";
 import { Button } from "@heroui/react";
 import Image from "next/image";
 import React from "react";
@@ -33,7 +34,7 @@ const DetailsPage = async ({ params }) => {
         <div className="overflow-hidden rounded-2xl bg-white shadow-lg">
 
           <div className="flex justify-end gap-3 p-5">
-            <Button size="sm"><BiEdit></BiEdit>Update car</Button>
+            <UpdateCarPage car={car}></UpdateCarPage>
             <DeleteCar car={car}></DeleteCar>
           </div>
 
