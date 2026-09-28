@@ -1,3 +1,4 @@
+import BookCardPage from "@/components/BookCard";
 import { DeleteCar } from "@/components/DeleteCar";
 import { UpdateCarPage } from "@/components/UpdateCar";
 import { Button } from "@heroui/react";
@@ -33,17 +34,13 @@ const DetailsPage = async ({ params }) => {
       
         <div className="overflow-hidden rounded-2xl bg-white shadow-lg">
 
-          <div className="flex justify-end gap-3 p-5">
-            <UpdateCarPage car={car}></UpdateCarPage>
-            <DeleteCar car={car}></DeleteCar>
-          </div>
-
+         
 
 
           <div className="grid grid-cols-1 lg:grid-cols-2">
             
        
-            <div className="relative h-72 sm:h-96 lg:h-full lg:min-h-[450px]">
+            <div className="relative h-72 sm:h-96 lg:h-full lg:min-h-[400px]">
               <Image
                 src={imageUrl.trim()}
                 alt={name}
@@ -54,6 +51,12 @@ const DetailsPage = async ({ params }) => {
 
            
             <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
+
+               <div className="flex justify-end gap-3 ">
+            <UpdateCarPage car={car}></UpdateCarPage>
+            <DeleteCar car={car}></DeleteCar>
+          </div>
+
               
               
               <div className="mb-6">
@@ -71,7 +74,7 @@ const DetailsPage = async ({ params }) => {
               </div>
 
           
-              <div className="mb-6 rounded-xl bg-blue-50 p-4">
+              <div className="mb-4 rounded-xl bg-blue-50 p-4">
                 <p className="text-sm text-gray-500">Rental Price</p>
 
                 <div className="mt-1 flex items-end gap-2">
@@ -124,7 +127,7 @@ const DetailsPage = async ({ params }) => {
               </div>
 
           
-              <div className="py-6">
+              <div className="py-4">
                 <h2 className="mb-2 text-lg font-semibold text-gray-900">
                   About This Car
                 </h2>
@@ -135,11 +138,7 @@ const DetailsPage = async ({ params }) => {
               </div>
 
         
-              <button
-                className="w-full rounded-xl bg-blue-600 px-6 py-3.5 text-base font-semibold text-white transition hover:bg-blue-700 active:scale-[0.98]"
-              >
-                Book Now
-              </button>
+            <BookCardPage></BookCardPage>
             </div>
           </div>
         </div>
