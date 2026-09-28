@@ -116,7 +116,7 @@ const Navbar = () => {
           ) : (
           
             <Link
-              href="/login"
+              href="/auth/login"
               className="rounded-lg bg-blue-600 px-5 py-2.5 font-medium text-white transition hover:bg-blue-700"
             >
               Login
@@ -226,7 +226,7 @@ const Navbar = () => {
 
             ) : (
               <Link
-                href="/login"
+                href="/auth/login"
                 onClick={() => setIsMenuOpen(false)}
                 className="rounded-lg bg-blue-600 px-5 py-2.5 text-center font-medium text-white hover:bg-blue-700"
               >
