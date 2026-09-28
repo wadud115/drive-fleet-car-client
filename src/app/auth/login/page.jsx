@@ -75,30 +75,37 @@ const LogInPage = () => {
         
         
               
+            <TextField
+                          isRequired
+                          minLength={8}
+                          name="password"
+                          type="password"
+                          validate={(value) => {
+                            if (value.length < 8) {
+                              return "Password must be at least 8 characters";
+                            }
+                            if (!/[A-Z]/.test(value)) {
+                              return "Password must contain at least one uppercase letter";
+                            }
           
-              <TextField
-                isRequired
-                minLength={8}
-                name="password"
-                type="password"
-                validate={(value) => {
-                  if (value.length < 8) {
-                    return "Password must be at least 8 characters";
-                  }
-                  if (!/[A-Z]/.test(value)) {
-                    return "Password must contain at least one uppercase letter";
-                  }
-                  if (!/[0-9]/.test(value)) {
-                    return "Password must contain at least one number";
-                  }
-                  return null;
-                }}
-              >
-                <Label>Password</Label>
-                <Input placeholder="Enter your password" />
-                <Description>Must be at least 8 characters with 1 uppercase and 1 number</Description>
-                <FieldError />
-              </TextField>
+                             if (!/[a-z]/.test(value)) {
+                              return "Password must contain at least one lowercase letter";
+                            }
+          
+          
+                            if (!/[0-9]/.test(value)) {
+                              return "Password must contain at least one number";
+                            }
+                            return null;
+                          }}
+                        >
+                          <Label>Password</Label>
+                          <Input placeholder="Enter your password" />
+                          <Description>Must be at least 8 characters with 1 uppercase and 1 lowercase and  number</Description>
+                          <FieldError />
+                        </TextField>
+             
+             
               <div className="flex gap-2">
                 <Button className={'bg-blue-500  w-full'} type="submit">
                   

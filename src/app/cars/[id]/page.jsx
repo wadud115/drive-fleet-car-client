@@ -1,5 +1,9 @@
+import { DeleteCar } from "@/components/DeleteCar";
+import { Button } from "@heroui/react";
 import Image from "next/image";
 import React from "react";
+import { BiEdit } from "react-icons/bi";
+import { IoTrashBin } from "react-icons/io5";
 
 const DetailsPage = async ({ params }) => {
   const { id } = await params;
@@ -27,9 +31,17 @@ const DetailsPage = async ({ params }) => {
       <div className="mx-auto max-w-5xl">
       
         <div className="overflow-hidden rounded-2xl bg-white shadow-lg">
+
+          <div className="flex justify-end gap-3 p-5">
+            <Button size="sm"><BiEdit></BiEdit>Update car</Button>
+            <DeleteCar car={car}></DeleteCar>
+          </div>
+
+
+
           <div className="grid grid-cols-1 lg:grid-cols-2">
             
-            {/* Car Image */}
+       
             <div className="relative h-72 sm:h-96 lg:h-full lg:min-h-[450px]">
               <Image
                 src={imageUrl.trim()}
