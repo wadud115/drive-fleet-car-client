@@ -1,81 +1,183 @@
-import { Button, Card, DateField, Label, Select,SelectItem, TextArea, TextField } from '@heroui/react';
-import { Calendar, Radio } from 'lucide-react';
-import React from 'react';
-
-const BookCardPage = () => {
-    return (
-        <div>
-
-            <Card className="p-5 sm:p-7 shadow-lg bg-blue-50">
-                
-                <div className="mb-3">
-                    <h2 className="text-2xl sm:text-3xl font-bold">
-                        Book Car
-                    </h2>
-
-                    <p className="text-sm text-gray-500 mt-1">
-                        Fill in the details below to book your car.
-                    </p>
-                </div>
-
-                <form
-                   
-                    className="flex flex-col gap-5"
-                >
-<div className="flex flex-col gap-2">
-    <label htmlFor="driverNeeded" className="text-sm font-medium">
-        Driver Needed?
-    </label>
-
-    <select
-        id="driverNeeded"
-        name="driverNeeded"
-        required
-        className="w-full rounded-lg border px-3 py-2 outline-none"
-    >
-        <option value="">Select an option</option>
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-    </select>
-  </div>
-
-<div className="flex flex-col gap-2">
-    <label htmlFor="date" className="text-sm font-medium">
-        Booking Date
-    </label>
-
-    <input
-        id="date"
-        name="date"
-        type="date"
-        required
-        className="w-full rounded-lg border px-3 py-2 outline-none"
-    />
-</div>
 
 
-                    
-                    <TextField name="specialNote">
-                        <Label>Special Note</Label>
 
-                        <TextArea
-                            placeholder="Write any special request..."
-                            rows={3}
-                        />
-                    </TextField>
+"use client";
 
-                  
-                    <Button
-                        type="submit"
-                        className="w-full bg-blue-600 text-white font-semibold"
-                    >
-                        Book Now
-                    </Button>
-                </form>
-            </Card>
-            
-        </div>
-    );
+import { authClient } from "@/lib/auth-client";
+
+import {Button, Card, DateField, Label, Modal, TextArea, TextField} from "@heroui/react";
+import { useState } from "react";
+
+
+
+export function BookCardPage({car}) {
+
+      const {data : session} = authClient.useSession();
+
+//   console.log(session)
+
+const user = session?.user;
+console.log(user)
+
+const [date , setDate] = useState(null)
+
+      const {
+    name,
+    price,
+    seat,
+    type,
+    availability,
+    imageUrl,
+    pickupLocation,
+    description,
+    _id,
+  } = car;
+
+
+  const handleBook = async () => {
+  if (!user) {
+    alert("Please login first");
+    return;
+  }
+
+  if (!date) {
+    alert("Please select a booking date");
+    return;
+  }
+
+  const bookingData = {
+    userId: user.id,
+    userName: user.name,
+
+    carName: name,
+    carId: _id,
+
+    price,
+    seat,
+    type,
+    availability,
+    imageUrl,
+    pickupLocation,
+    description,
+
+    date: date.toString(),
+  };
+
+  try {
+    const res = await fetch("http://localhost:5000/booking", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(bookingData),
+    });
+
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.log("Server Error:", errorText);
+      alert("Booking failed");
+      return;
+    }
+
+    const data = await res.json();
+
+    console.log("Booking successful:", data);
+    alert("Car booked successfully!");
+
+  } catch (error) {
+    console.error("Booking error:", error);
+    alert("Something went wrong!");
+  }
 };
+ 
 
-export default BookCardPage;
+
+
+  return (
+    <Modal>
+      <Button >Book Car</Button>
+      <Modal.Backdrop>
+        <Modal.Container>
+          <Modal.Dialog className="sm:max-w-[360px]">
+            <Modal.CloseTrigger />
+            <Modal.Header>
+             <p className="font-semibold text-blue-500"> Booking Form</p>
+             <Modal.Heading className="text-2xl font-bold">{name}</Modal.Heading>
+            </Modal.Header>
+           
+          
+            <Modal.Body>
+             
+ <Card className="flex flex-col gap-5">
+
+               
+               <div className="flex flex-col gap-2">
+                 <label
+                   htmlFor="driverNeeded"
+                   className="text-sm font-medium"
+                 >
+                   Driver Needed?
+                 </label>
+
+                 <select
+                   id="driverNeeded"
+                   name="driverNeeded"
+                   required
+                   className="w-full rounded-lg border px-3 py-2 outline-none"
+                 >
+                   <option value="">Select an option</option>
+                   <option value="yes">Yes</option>
+                   <option value="no">No</option>
+                 </select>
+               </div>
+
+            
+                <DateField onChange={setDate} className="w-[256px]" name="date">
+      <Label>Date</Label>
+      <DateField.Group>
+        <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
+      </DateField.Group>
+    </DateField>
+
+             
+             <TextField name="specialNote">
+                 <Label>Special Note</Label>
+
+                 <TextArea
+                   placeholder="Write any special request..."
+                   rows={3}
+                 />
+              </TextField>
+
+               <Button
+
+               onClick={handleBook}
+               
+                
+                className="w-full bg-blue-600 text-white font-semibold"
+              >
+                Confirm Booking
+               </Button>
+
+            
+
+             </Card>
+            </Modal.Body>
+            
+          </Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
+    </Modal>
+  );
+}
+
+
+
+
+
+
+
+
+
+
+

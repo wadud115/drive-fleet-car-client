@@ -1,4 +1,5 @@
-import BookCardPage from "@/components/BookCard";
+
+import { BookCardPage } from "@/components/BookCard";
 import { DeleteCar } from "@/components/DeleteCar";
 import { UpdateCarPage } from "@/components/UpdateCar";
 import { Button } from "@heroui/react";
@@ -137,8 +138,10 @@ const DetailsPage = async ({ params }) => {
                 </p>
               </div>
 
-        
-            <BookCardPage></BookCardPage>
+        <div className="flex justify-end">
+          <BookCardPage car={car}></BookCardPage>
+        </div>
+            
             </div>
           </div>
         </div>
