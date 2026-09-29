@@ -65,20 +65,27 @@ const [date , setDate] = useState(null)
   };
 
   try {
-    const res = await fetch("http://localhost:5000/booking", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(bookingData),
-    });
+   const res = await fetch("http://localhost:5000/booking", {
+  method: "POST",
+  headers: {
+    "content-type": "application/json",
+  },
+  body: JSON.stringify(bookingData),
+});
 
-    if (!res.ok) {
-      const errorText = await res.text();
-      console.log("Server Error:", errorText);
-      alert("Booking failed");
-      return;
-    }
+if (!res.ok) {
+  const errorText = await res.text();
+
+  console.log("Server Error:", errorText);
+
+  alert("Booking failed");
+
+  return;
+}
+
+await fetch(`http://localhost:5000/cars/${car._id}/booking-count`, {
+  method: "PATCH",
+});
 
     const data = await res.json();
 

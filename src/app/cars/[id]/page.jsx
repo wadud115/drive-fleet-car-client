@@ -67,6 +67,11 @@ const DetailsPage = async ({ params }) => {
                 <p className="mt-2 text-gray-500">
                   Car ID: {_id}
                 </p>
+
+                <p className="mt-3 bg-blue-50 p-2 rounded-2xl">
+  <span className="font-medium ">Booking Count:</span>{" "}
+  {car.booking_count || 0}
+</p>
               </div>
 
           
