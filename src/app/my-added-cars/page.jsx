@@ -43,7 +43,7 @@ const MyAddedCarsPage = async () => {
   {cars.map((car) => (
     <div
       key={car._id}
-      className="flex flex-col sm:flex-row gap-5 border rounded-2xl p-4 sm:p-5 shadow-sm hover:shadow-md transition bg-white"
+      className="flex md:w-3xl  flex-col sm:flex-row gap-5 border rounded-2xl p-4 sm:p-5 shadow-sm hover:shadow-md transition bg-white"
     >
       <div className="w-full  sm:w-52 h-48 sm:h-40 shrink-0 overflow-hidden rounded-xl">
         <Image
@@ -51,7 +51,7 @@ const MyAddedCarsPage = async () => {
           alt={car.name}
           width={300}
           height={200}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-fill"
         />
       </div>
 
@@ -92,7 +92,7 @@ const MyAddedCarsPage = async () => {
           </p>
         </div>
 
-            <div className="flex gap-5 mt-5 ">
+            <div className="flex justify-end gap-5 mt-5 ">
             <UpdateCarPage car={car}></UpdateCarPage>
             <DeleteCar car={car}></DeleteCar>
           </div>
