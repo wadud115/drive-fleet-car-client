@@ -6,6 +6,7 @@
 import { authClient } from "@/lib/auth-client";
 
 import {Button, Card, DateField, Label, Modal, TextArea, TextField} from "@heroui/react";
+import { redirect } from "next/navigation";
 import { useState } from "react";
 
 
@@ -83,6 +84,8 @@ const [date , setDate] = useState(null)
 
     console.log("Booking successful:", data);
     alert("Car booked successfully!");
+
+  
 
   } catch (error) {
     console.error("Booking error:", error);

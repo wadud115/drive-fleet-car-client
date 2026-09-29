@@ -1,3 +1,4 @@
+import AvailableCarPage from "@/components/AvilableCar";
 import Banner from "@/components/Banner";
 import HowItWorks from "@/components/HowItWorks";
 import WhyChooseUs from "@/components/WhyChoosUs";
@@ -8,6 +9,7 @@ export default function Home() {
     <div>
 
       <Banner></Banner>
+      <AvailableCarPage></AvailableCarPage>
       <WhyChooseUs></WhyChooseUs>
       <HowItWorks></HowItWorks>
     </div>

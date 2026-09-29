@@ -4,16 +4,22 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Menu, X, ChevronDown, User } from "lucide-react";
+import { authClient } from "@/lib/auth-client";
 
 const Navbar = () => {
+
+
+  const handleSignOut = async()=>{
+    await authClient.signOut()
+  }
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // TODO: Later, get this value from your authentication system
-  // const { user, logout } = useAuth();
+  
 
-  // For now, use false to show Login button
-  // Change to true to see the logged-in profile dropdown
-  const isLoggedIn = false;
+
+  const {data: session} = authClient.useSession()
+  const user = session?.user
+  console.log(user)
 
   return (
     <nav className="border-b bg-white shadow-sm">
@@ -58,7 +64,7 @@ const Navbar = () => {
           </Link>
 
 
-          {isLoggedIn ? (
+          {user ? (
            
             <div className="relative group">
 
@@ -102,7 +108,7 @@ const Navbar = () => {
 
                 <hr className="my-2" />
 
-                <button
+                <button  onClick={handleSignOut}
                   className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50"
                   
                   
@@ -174,7 +180,7 @@ const Navbar = () => {
             </Link>
 
             
-            {isLoggedIn ? (
+            {user ? (
               <div className="border-t pt-4">
 
                 <div className="mb-3 flex items-center gap-3">
@@ -212,7 +218,7 @@ const Navbar = () => {
                     My Added Cars
                   </Link>
 
-                  <button
+                  <button  onClick={handleSignOut}
                     className="text-left text-sm text-red-600"
                     
 
