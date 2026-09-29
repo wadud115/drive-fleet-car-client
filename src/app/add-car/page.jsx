@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import {
   Button,
   FieldError,
@@ -15,13 +16,20 @@ import {
 const AddCarPage = () => {
 
 
+  const { data: session } = authClient.useSession();
+
+const user = session?.user;
+
+console.log(user)
+
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
 
     const carData = Object.fromEntries(formData.entries());
-
+    carData.userId = user.id;
     console.log(carData);
 
 

@@ -53,11 +53,6 @@ const DetailsPage = async ({ params }) => {
            
             <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
 
-               <div className="flex justify-end gap-3 ">
-            <UpdateCarPage car={car}></UpdateCarPage>
-            <DeleteCar car={car}></DeleteCar>
-          </div>
-
               
               
               <div className="mb-6">
