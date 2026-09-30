@@ -2,6 +2,7 @@ import { DeleteCar } from "@/components/DeleteCar";
 import { UpdateCarPage } from "@/components/UpdateCar";
 import { auth } from "@/lib/auth";
 import { MapPin } from "@gravity-ui/icons";
+
 import { headers } from "next/headers";
 import Image from "next/image";
 
@@ -22,11 +23,20 @@ const MyAddedCarsPage = async () => {
     );
   }
 
+
+  const {token} = await auth.api.getToken({
+    headers: await headers()
+  })
+
+  console.log(token)
+
   const res = await fetch(
-    `http://localhost:5000/my-cars/${user.id}`,
-    {
-      cache: "no-store",
+    `http://localhost:5000/my-cars/${user.id}`, {
+      headers :{
+        authorization : `Bearer ${token}`
+      }
     }
+    
   );
 
   const cars = await res.json();

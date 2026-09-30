@@ -1,10 +1,18 @@
 import { auth } from "@/lib/auth";
 import { MapPin } from "@gravity-ui/icons";
 import { headers } from "next/headers";
+
 import Image from "next/image";
 import { BiCalendar, BiCar } from "react-icons/bi";
 
 const MyBookingsPage = async () => {
+
+  const {token} = await auth.api.getToken({
+    headers : await headers()
+  })
+
+  console.log(token)
+  
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -12,7 +20,11 @@ const MyBookingsPage = async () => {
   const user = session?.user;
 
   const res = await fetch(
-    `http://localhost:5000/booking/${user.id}`
+    `http://localhost:5000/booking/${user.id}` , {
+      headers:{
+        authorization : `Bearer ${token}`
+      }
+    }
   );
 
   const bookings = await res.json();
