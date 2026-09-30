@@ -35,7 +35,7 @@ const{   name,
           <Card className="overflow-hidden transition duration-300 hover:-translate-y-1 hover:shadow-xl">
 
           
-            <div className="relative h-56 overflow-hidden">
+            <div className="relative h-56 overflow-hidden rounded-2xl">
              <Image className=' object-cover' src={imageUrl.trim()}
              alt={name} 
     
@@ -67,7 +67,7 @@ const{   name,
                 </div>
 
                 <div className="text-right">
-                  <p className="text-xl font-bold text-blue-600">
+                  <p className="text-l w-[100px] font-bold text-blue-600">
                    Price :  ${price}
                   </p>
 
