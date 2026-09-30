@@ -12,67 +12,114 @@ import {
   Select,
   Card,
 } from "@heroui/react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 const AddCarPage = () => {
+  const router = useRouter();
 
+  const { data: session, isPending } = authClient.useSession();
 
-  const { data: session } = authClient.useSession();
+  const user = session?.user;
 
-const user = session?.user;
-
-console.log(user)
-
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData(e.currentTarget);
+    if (!user || loading) return;
 
-    const carData = Object.fromEntries(formData.entries());
-    carData.userId = user.id;
-    console.log(carData);
+    setLoading(true);
 
-   const {data:tokenData}= await authClient.token()
-   console.log(tokenData)
+    try {
+      const formData = new FormData(e.currentTarget);
 
-    const res = await fetch("http://localhost:5000/cars" , {
+      const carData = Object.fromEntries(formData.entries());
+
+      carData.userId = user.id;
+
+      const { data: tokenData } = await authClient.token();
+
+      if (!tokenData?.token) {
+        setLoading(false);
+        return;
+      }
+
+      const res = await fetch("http://localhost:5000/cars", {
         method: "POST",
-        headers : {
-            'content-type' : 'application/json',
-            authorization : `Bearer ${tokenData.token}`
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${tokenData.token}`,
         },
+        body: JSON.stringify(carData),
+      });
 
-        body: JSON.stringify(carData)
-    })
+      const data = await res.json();
 
-    const data = await res.json()
+      console.log(data);
 
-    console.log(data)
+      if (res.ok) {
+        toast.success("Car added successfully! ");
 
+        e.currentTarget.reset();
+
+        router.push("/cars");
+      }
+
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
   };
+
+  if (isPending) {
+    return (
+      <div className="flex min-h-[400px] items-center justify-center">
+        <div className="h-10 w-10 animate-spin rounded-full border-4 border-blue-200 border-t-blue-600"></div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="mx-auto flex min-h-[400px] max-w-7xl items-center justify-center p-5">
+        <div className="rounded-2xl border border-gray-200 bg-gray-50 px-8 py-10 text-center">
+          <h2 className="text-2xl font-bold text-gray-800">
+            Please Login
+          </h2>
+
+          <p className="mt-2 text-gray-500">
+            You need to login before adding a car.
+          </p>
+
+          <Button
+            className="mt-5 bg-blue-600 text-white"
+            onPress={() => router.push("/auth/login")}
+          >
+            Login
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto max-w-7xl p-5">
-
-
       <h2 className="mb-5 text-2xl font-bold">
         Add Car
       </h2>
 
       <Card className="w-full p-3">
-
         <form
           onSubmit={onSubmit}
           className="space-y-8 p-5 sm:p-10"
         >
-
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
 
             <div className="md:col-span-2">
-              <TextField
-                name="name"
-                isRequired
-              >
+              <TextField name="name" isRequired>
                 <Label>Car Name</Label>
 
                 <Input
@@ -84,8 +131,6 @@ console.log(user)
               </TextField>
             </div>
 
-
-            
             <TextField
               name="price"
               type="number"
@@ -102,8 +147,6 @@ console.log(user)
               <FieldError />
             </TextField>
 
-
-      
             <TextField
               name="seat"
               type="number"
@@ -120,8 +163,6 @@ console.log(user)
               <FieldError />
             </TextField>
 
-
-    
             <div>
               <Select
                 name="type"
@@ -192,8 +233,6 @@ console.log(user)
               </Select>
             </div>
 
-
-       
             <div>
               <Select
                 name="availability"
@@ -232,8 +271,6 @@ console.log(user)
               </Select>
             </div>
 
-
-   
             <div className="md:col-span-2">
               <TextField
                 name="imageUrl"
@@ -252,7 +289,6 @@ console.log(user)
               </TextField>
             </div>
 
-
             <div className="md:col-span-2">
               <TextField
                 name="pickupLocation"
@@ -268,7 +304,6 @@ console.log(user)
                 <FieldError />
               </TextField>
             </div>
-
 
             <div className="md:col-span-2">
               <TextField
@@ -288,21 +323,15 @@ console.log(user)
 
           </div>
 
-
-       
           <Button
             type="submit"
-            variant="outline"
-            className=" w-full bg-blue-500 text-white flex items-center"
-            
+            disabled={loading}
+            className="flex w-full items-center bg-blue-500 text-white hover:bg-blue-600"
           >
-            Add Car
+            {loading ? "Adding Car..." : "Add Car"}
           </Button>
-
         </form>
-
       </Card>
-
     </div>
   );
 };

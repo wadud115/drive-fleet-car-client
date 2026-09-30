@@ -6,12 +6,15 @@
 import { authClient } from "@/lib/auth-client";
 
 import {Button, Card, DateField, Label, Modal, TextArea, TextField} from "@heroui/react";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 
 
 export function BookCardPage({car}) {
+
+  const router = useRouter()
 
       const {data : session} = authClient.useSession();
 
@@ -78,7 +81,7 @@ if (!res.ok) {
 
   console.log("Server Error:", errorText);
 
-  alert("Booking failed");
+  toast.error("booking failed")
 
   return;
 }
@@ -90,13 +93,15 @@ await fetch(`http://localhost:5000/cars/${car._id}/booking-count`, {
     const data = await res.json();
 
     console.log("Booking successful:", data);
-    alert("Car booked successfully!");
+    toast.success("Car booked successfully!");
+    router.push('/my-bookings')
+
 
   
 
   } catch (error) {
     console.error("Booking error:", error);
-    alert("Something went wrong!");
+    toast.error("Something went wrong!");
   }
 };
  

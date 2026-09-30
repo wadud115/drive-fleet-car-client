@@ -19,7 +19,7 @@ export function DeleteCar({car}) {
         }) 
 
         const data = res.json()
-        redirect('/cars')
+        redirect('/my-added-cars')
     }
   return (
     <AlertDialog>

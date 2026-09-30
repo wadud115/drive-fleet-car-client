@@ -20,5 +20,6 @@ export const config = {
     "/my-bookings/:path*",
     "/my-added-cars/:path*",
     "/add-car/:path*",
+    "/cars/:path*",
   ],
 };
