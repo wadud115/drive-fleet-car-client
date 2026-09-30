@@ -61,7 +61,7 @@ export function UpdateCarPage({car}) {
                 
                           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                 
-                            <div className="md:col-span-2">
+                            {/* <div className="md:col-span-2">
                               <TextField
                               defaultValue={name}
                                 name="name"
@@ -76,7 +76,7 @@ export function UpdateCarPage({car}) {
                 
                                 <FieldError />
                               </TextField>
-                            </div>
+                            </div> */}
                 
                 
                             
@@ -98,7 +98,7 @@ export function UpdateCarPage({car}) {
                             </TextField>
                 
                 
-                      
+{/*                       
                             <TextField
                              defaultValue={seat}
                               name="seat"
@@ -114,7 +114,7 @@ export function UpdateCarPage({car}) {
                               />
                 
                               <FieldError />
-                            </TextField>
+                            </TextField> */}
                 
                 
                     

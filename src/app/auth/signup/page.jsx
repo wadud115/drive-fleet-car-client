@@ -6,6 +6,7 @@ import { Button, Card, Description, FieldError, Form, Input, Label, Separator, T
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import React from 'react';
+import toast from 'react-hot-toast';
 import { FcGoogle } from 'react-icons/fc';
 
 const RegisterPage = () => {
@@ -33,16 +34,24 @@ const RegisterPage = () => {
     name : user.name, 
     email : user.email, 
     password : user.password, 
-    imageUrl : user.imageUrl, 
+    image : user.imageUrl, 
     
 });
 
      console.log({data, error})
 
-     if(data){
-        redirect('/auth/login')
-     }
+       if (error) {
+    toast.error(error.message || "Register failed!");
+    return;
+  }
 
+      if (data) {
+    toast.success("register successful! 🚗");
+
+    setTimeout(() => {
+      redirect("/auth/login");
+    }, 1000);
+  }
     }
     return (
           <div className='max-w-7xl mx-auto my-10'>

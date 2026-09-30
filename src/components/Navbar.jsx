@@ -5,6 +5,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu, X, ChevronDown, User } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
+import Image from "next/image";
+import { Avatar } from "@heroui/react";
 
 const Navbar = () => {
 
@@ -21,13 +23,14 @@ const Navbar = () => {
   const user = session?.user
   console.log(user)
 
+
   return (
-    <nav className="border-b bg-white shadow-sm">
+    <nav className="border-b bg-gray-100 shadow-sm">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
 
         
         <Link href="/" className="text-2xl font-bold">
-          Car<span className="text-blue-600">Rent</span>
+      <Image alt="logo" src="/DLogo.png" width={150} height={50} className="bg-transparent"></Image>
         </Link>
 
     
@@ -72,11 +75,14 @@ const Navbar = () => {
 
           
                 <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 text-blue-600">
-                  <User size={18} />
+                   <Avatar>
+        <Avatar.Image referrerPolicy="no-referrer" alt="John Doe" src={user?.image} />
+        <Avatar.Fallback>{user.name[0]}</Avatar.Fallback>
+      </Avatar>
                 </div>
 
                 <span className="font-medium text-gray-700">
-                  User
+                 {user.name}
                 </span>
 
                 <ChevronDown size={16} />
@@ -186,11 +192,14 @@ const Navbar = () => {
                 <div className="mb-3 flex items-center gap-3">
 
                   <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 text-blue-600">
-                    <User size={18} />
+                             <Avatar>
+        <Avatar.Image referrerPolicy="no-referrer" alt="John Doe" src={user?.image} />
+        <Avatar.Fallback>{user.name[0]}</Avatar.Fallback>
+      </Avatar>
                   </div>
 
                   <span className="font-medium">
-                    User
+                    {user.name}
                   </span>
 
                 </div>

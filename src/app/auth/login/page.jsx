@@ -6,6 +6,7 @@ import { Button, Card, Description, FieldError, Form, Input, Label, Separator, T
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import React from 'react';
+import toast from 'react-hot-toast';
 import { FcGoogle } from 'react-icons/fc';
 
 const LogInPage = () => {
@@ -36,9 +37,21 @@ const LogInPage = () => {
         console.log({data, error})
 
 
-    if(data){
-        redirect('/')
-    }
+          if (error) {
+    toast.error(error.message || "Login failed!");
+    return;
+  }
+
+
+    if (data) {
+    toast.success("Login successful! 🚗");
+
+    setTimeout(() => {
+      redirect("/");
+    }, 1000);
+  }
+
+        
 
     }
     return (
