@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🚗 DriveFleet - Car Rental Platform
 
-## Getting Started
+DriveFleet is a full-stack car rental platform where users can explore available cars, view detailed information, book cars, manage their bookings, and add their own cars for rental.
 
-First, run the development server:
+## 🌐 Live Website
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+🔗 Live Site: `YOUR_LIVE_CLIENT_URL`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📦 Client Repository
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+🔗 GitHub: `YOUR_CLIENT_GITHUB_REPOSITORY_URL`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ⚙️ Server Repository
 
-## Learn More
+🔗 GitHub: `YOUR_SERVER_GITHUB_REPOSITORY_URL`
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📖 About The Project
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+DriveFleet is a modern and responsive car rental platform built with Next.js, Express.js, and MongoDB.
 
-## Deploy on Vercel
+The platform provides a complete car rental experience for both renters and car owners. Users can securely register and login, explore available cars, view car details, book cars, and manage their bookings.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Car owners can also add their own cars, update car information, check availability, and delete their listings.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## ✨ Features
+
+- 🚗 Browse and explore available and unavailable cars.
+- 🔍 Search cars by car name using MongoDB regex.
+- 🏷️ Filter cars by car type.
+- 🔐 Secure authentication with email/password and Google login.
+- 👤 User profile dropdown with protected private routes.
+- ➕ Add new car listings with detailed information.
+- ✏️ Update your own car listings.
+- 🗑️ Delete your own car listings with confirmation.
+- 📅 Book cars with driver requirement and special notes.
+- 📋 Manage personal bookings from the My Bookings page.
+- 📊 Track car booking count using MongoDB `$inc`.
+- 🔒 Protected APIs and authenticated user-specific data.
+- 📱 Fully responsive design for mobile, tablet, and desktop.
+- 🔔 Toast notifications for successful and failed actions.
+- ⏳ Loading spinner for data-fetching states.
+- ❌ Custom 404 Not Found page.
+- 🗄️ MongoDB database for storing cars, bookings, and user-related data.
+
+---
+
+## 🛠️ Technologies Used
+
+### Frontend
+
+- Next.js
+- React.js
+- JavaScript
+- Tailwind CSS
+- HeroUI
+- Lucide React
+- React Hot Toast
+
+### Backend
+
+- Node.js
+- Express.js
+- MongoDB
+- REST API
+- JWT
+- HTTPOnly Cookies
+- CORS
+- dotenv
+
+### Authentication
+
+- Better Auth
+- Email & Password Authentication
+- Google Authentication
+- Protected Routes
+- Session Management
+
+---
+
+## 🏗️ Project Structure
+
+### Client
+
+```text
+drive-fleet-car/
+├── src/
+│   ├── app/
+│   ├── components/
+│   ├── lib/
+│   └── ...
+├── public/
+├── .env.local
+├── next.config.js
+└── package.json
