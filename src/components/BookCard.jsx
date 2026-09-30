@@ -164,7 +164,7 @@ await fetch(`http://localhost:5000/cars/${car._id}/booking-count`, {
                onClick={handleBook}
                
                 
-                className="w-full bg-blue-600 text-white font-semibold"
+                className="w-full bg-blue-500 text-white font-semibold"
               >
                 Confirm Booking
                </Button>

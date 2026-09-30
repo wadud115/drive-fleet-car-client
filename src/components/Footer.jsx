@@ -1,7 +1,7 @@
 
 import Link from "next/link";
 
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, CarFront } from "lucide-react";
 
 import {
   FaFacebookF,
@@ -18,9 +18,20 @@ const Footer = () => {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
 
           <div>
-            <h2 className="text-2xl font-bold">
-              Car<span className="text-blue-500">Rent</span>
-            </h2>
+           <Link
+  href="/"
+  className="flex items-center gap-2 text-2xl font-extrabold"
+>
+  <CarFront className="h-8 w-8 text-blue-600" />
+
+  <span>
+    <span className="text-blue-900">Drive</span>
+    <span className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
+      Fleet
+    </span>
+  </span>
+</Link>
+    
 
             <p className="mt-4 max-w-sm text-sm leading-6 text-gray-400">
               Rent your favorite car easily and enjoy a comfortable,
@@ -82,21 +93,14 @@ const Footer = () => {
 
               <li>
                 <Link
-                  href="/about"
+                  href="/add-car"
                   className="transition hover:text-blue-500"
                 >
-                  About Us
+                  Add car
                 </Link>
               </li>
 
-              <li>
-                <Link
-                  href="/contact"
-                  className="transition hover:text-blue-500"
-                >
-                  Contact
-                </Link>
-              </li>
+              
 
             </ul>
           </div>
@@ -125,7 +129,7 @@ const Footer = () => {
 
             <div className="space-y-4 text-sm text-gray-400">
 
-              {/* Address */}
+             
               <div className="flex items-start gap-3">
                 <MapPin
                   size={20}
@@ -137,7 +141,7 @@ const Footer = () => {
                 </span>
               </div>
 
-              {/* Phone */}
+          
               <div className="flex items-center gap-3">
                 <Phone
                   size={20}

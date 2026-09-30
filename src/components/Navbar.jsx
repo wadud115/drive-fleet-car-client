@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X, ChevronDown, User } from "lucide-react";
+import { Menu, X, ChevronDown, User, CarFront } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 import Image from "next/image";
 import { Avatar } from "@heroui/react";
@@ -29,10 +29,21 @@ const Navbar = () => {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
 
         
-        <Link href="/" className="text-2xl font-bold">
-      <Image alt="logo" src="/DLogo.png" width={150} height={50} className="bg-transparent"></Image>
-        </Link>
 
+
+<Link
+  href="/"
+  className="flex items-center gap-2 text-2xl font-extrabold"
+>
+  <CarFront className="h-8 w-8 text-blue-600" />
+
+  <span>
+    <span className="text-blue-900">Drive</span>
+    <span className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
+      Fleet
+    </span>
+  </span>
+</Link>
     
         <div className="hidden items-center gap-8 md:flex">
 

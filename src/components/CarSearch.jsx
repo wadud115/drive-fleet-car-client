@@ -2,6 +2,7 @@
 
 import { Input } from "@heroui/react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const CarSearch = () => {
   const router = useRouter();
@@ -10,17 +11,27 @@ const CarSearch = () => {
   const search = searchParams.get("search") || "";
   const type = searchParams.get("type") || "";
 
-  const handleSearch = (value) => {
-    const params = new URLSearchParams(searchParams.toString());
+  const [searchValue, setSearchValue] = useState(search);
 
-    if (value) {
-      params.set("search", value);
-    } else {
-      params.delete("search");
-    }
+  useEffect(() => {
+    setSearchValue(search);
+  }, [search]);
 
-    router.push(`/cars?${params.toString()}`);
-  };
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const params = new URLSearchParams(searchParams.toString());
+
+      if (searchValue) {
+        params.set("search", searchValue);
+      } else {
+        params.delete("search");
+      }
+
+      router.push(`/cars?${params.toString()}`);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [searchValue]);
 
   const handleType = (value) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -39,8 +50,8 @@ const CarSearch = () => {
       <Input
         label="Search Car"
         placeholder="Search by car name..."
-        value={search}
-        onChange={(e) => handleSearch(e.target.value)}
+        value={searchValue}
+        onChange={(e) => setSearchValue(e.target.value)}
       />
 
       <select
@@ -53,8 +64,8 @@ const CarSearch = () => {
         <option value="SUV">SUV</option>
         <option value="Luxury">Luxury</option>
         <option value="Coupe">Coupe</option>
-        <option value="Coupe">Hatchback</option>
-        <option value="Coupe">Van</option>
+        <option value="Hatchback">Hatchback</option>
+        <option value="Van">Van</option>
       </select>
     </div>
   );
