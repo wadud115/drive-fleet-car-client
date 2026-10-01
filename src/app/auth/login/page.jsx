@@ -55,102 +55,123 @@ const LogInPage = () => {
 
     }
     return (
-          <div className='max-w-7xl mx-auto my-10'>
-        
-                    <div className='my-3 text-center'>
-                        <h1 className='font-bold text-2xl'>Log in</h1>
-                       
-                    </div>
-        
-        
-                    <Card className='p-5 '>   
-                        
-                            <Form onSubmit={onSubmit}  className="flex w-96 flex-col gap-4">
-        
-        
-        
-              <TextField
-                isRequired
-                name="email"
-                type="email"
-                validate={(value) => {
-                  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
-                    return "Please enter a valid email address";
-                  }
-                  return null;
-                }}
-              >
-                <Label>Email</Label>
-                <Input placeholder="john@example.com" />
-                <FieldError />
-              </TextField>
-        
-        
-        
-              
-            <TextField
-                          isRequired
-                          minLength={8}
-                          name="password"
-                          type="password"
-                          validate={(value) => {
-                            if (value.length < 8) {
-                              return "Password must be at least 8 characters";
-                            }
-                            if (!/[A-Z]/.test(value)) {
-                              return "Password must contain at least one uppercase letter";
-                            }
           
-                             if (!/[a-z]/.test(value)) {
-                              return "Password must contain at least one lowercase letter";
-                            }
-          
-          
-                            if (!/[0-9]/.test(value)) {
-                              return "Password must contain at least one number";
-                            }
-                            return null;
-                          }}
-                        >
-                          <Label>Password</Label>
-                          <Input placeholder="Enter your password" />
-                          <Description>Must be at least 8 characters with 1 uppercase and 1 lowercase and  number</Description>
-                          <FieldError />
-                        </TextField>
-             
-             
-              <div className="flex gap-2">
-                <Button className={'bg-blue-500  w-full'} type="submit">
-                  
-                  Login
-                </Button>
+<div className="max-w-7xl mx-auto my-6 sm:my-10 px-4 sm:px-6">
+  <div className="my-4 sm:my-6 text-center">
+    <h1 className="font-bold text-xl sm:text-2xl">
+      Log in
+    </h1>
+  </div>
 
-               
-               
-              </div>
-               <Link href={'/auth/signup'} className='text-center'>Do not have an account? <span className='font-semibold text-blue-500'>Register</span></Link>
-            </Form>
-        
-            <div>
-                <div className='flex justify-center gap-3 items-center my-3 '>
-            
-                  
-            
-                    <div className='font-bold'>Or</div>
-                    
-                    
-            
-                     </div>
-            
-                     <div>
-                        <Button onClick={handleGoogleLogIn} variant='outline' className={" w-full"}> <FcGoogle /> Sign In With Google</Button>
-            
-                     </div>
-                     </div>
-            
-            </Card>
-             
-                </div>
+  <Card className="w-full max-w-md mx-auto border border-gray-300 p-4 sm:p-5">
+    <Form
+      onSubmit={onSubmit}
+      className="flex w-full flex-col gap-4"
+    >
+      <TextField
+        isRequired
+        name="email"
+        type="email"
+        validate={(value) => {
+          if (
+            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)
+          ) {
+            return "Please enter a valid email address";
+          }
+
+          return null;
+        }}
+      >
+        <Label>Email</Label>
+        <Input
+          placeholder="john@example.com"
+          className="w-full"
+        />
+        <FieldError />
+      </TextField>
+
+      <TextField
+        isRequired
+        minLength={8}
+        name="password"
+        type="password"
+        validate={(value) => {
+          if (value.length < 8) {
+            return "Password must be at least 8 characters";
+          }
+
+          if (!/[A-Z]/.test(value)) {
+            return "Password must contain at least one uppercase letter";
+          }
+
+          if (!/[a-z]/.test(value)) {
+            return "Password must contain at least one lowercase letter";
+          }
+
+          if (!/[0-9]/.test(value)) {
+            return "Password must contain at least one number";
+          }
+
+          return null;
+        }}
+      >
+        <Label>Password</Label>
+
+        <Input
+          placeholder="Enter your password"
+          className="w-full"
+        />
+
+        <Description className="text-xs sm:text-sm">
+          Must be at least 8 characters with 1 uppercase,
+          1 lowercase and 1 number
+        </Description>
+
+        <FieldError />
+      </TextField>
+
+      <div className="w-full">
+        <Button
+          className="bg-blue-500 hover:bg-blue-600 w-full"
+          type="submit"
+        >
+          Login
+        </Button>
+      </div>
+
+      <Link
+        href="/auth/signup"
+        className="text-center text-sm sm:text-base"
+      >
+        Do not have an account?{" "}
+        <span className="font-semibold text-blue-500">
+          Register
+        </span>
+      </Link>
+
+      <div className="flex items-center gap-3 my-1 sm:my-2">
+        <div className="h-px bg-gray-200 flex-1"></div>
+
+        <div className="font-bold text-sm">Or</div>
+
+        <div className="h-px bg-gray-200 flex-1"></div>
+      </div>
+
+      <div className="w-full">
+        <Button
+          onClick={handleGoogleLogIn}
+          variant="outline"
+          className="w-full"
+        >
+          <FcGoogle />
+          <span>Sign In With Google</span>
+        </Button>
+      </div>
+    </Form>
+  </Card>
+</div>
+
+
     );
 };
 

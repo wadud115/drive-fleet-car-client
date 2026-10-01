@@ -46,7 +46,7 @@ const AddCarPage = () => {
         return;
       }
 
-      const res = await fetch("http://localhost:5000/cars", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/cars`, {
         method: "POST",
         headers: {
           "content-type": "application/json",

@@ -21,7 +21,7 @@ const carsPage = async ({ searchParams }) => {
   }
 
   const res = await fetch(
-    `http://localhost:5000/cars?${query.toString()}`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/cars?${query.toString()}`,
     {
       cache: "no-store",
     }

@@ -32,7 +32,7 @@ const MyAddedCarsPage = async () => {
   console.log(token)
 
   const res = await fetch(
-    `http://localhost:5000/my-cars/${user.id}`, {
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/my-cars/${user.id}`, {
       headers :{
         authorization : `Bearer ${token}`
       }
@@ -61,7 +61,7 @@ const MyAddedCarsPage = async () => {
       </h2>
 
       <p className="mt-2 max-w-md text-sm text-gray-500">
-        You haven't added any cars yet. Add your first car and make it
+        You have not added any cars yet. Add your first car and make it
         available for users to rent.
       </p>
 

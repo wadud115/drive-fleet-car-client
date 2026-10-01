@@ -7,12 +7,13 @@ import { BookMarked } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { BiEdit } from "react-icons/bi";
+import { BsBookmarkCheckFill } from "react-icons/bs";
 import { IoTrashBin } from "react-icons/io5";
 
 const DetailsPage = async ({ params }) => {
   const { id } = await params;
 
-  const res = await fetch(`http://localhost:5000/cars/${id}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/cars/${id}`, {
     cache: "no-store",
   });
 
@@ -69,9 +70,15 @@ const DetailsPage = async ({ params }) => {
                   Car ID: {_id}
                 </p>
 
-                <p className="mt-3 flex font-bold  gap-3 bg-blue-50 p-2 rounded-2xl">
-  <span className="font-medium "><BookMarked></BookMarked></span>{" Booked by "}
-   { car.booking_count || <p className="font-bold">0</p>} {'user'}
+    <p className="mt-3 flex items-center gap-3 rounded-2xl bg-blue-50 p-2 font-semibold">
+  <span className="font-medium">
+  <BsBookmarkCheckFill />
+  </span>
+  {" Booked by "}
+  <span className="font-semibold">
+    {car.booking_count || 0}
+  </span>
+  {" user"}
 </p>
               </div>
 
