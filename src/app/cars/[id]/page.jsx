@@ -3,6 +3,7 @@ import { BookCardPage } from "@/components/BookCard";
 import { DeleteCar } from "@/components/DeleteCar";
 import { UpdateCarPage } from "@/components/UpdateCar";
 import { Button } from "@heroui/react";
+import { BookMarked } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { BiEdit } from "react-icons/bi";
@@ -68,9 +69,9 @@ const DetailsPage = async ({ params }) => {
                   Car ID: {_id}
                 </p>
 
-                <p className="mt-3 bg-blue-50 p-2 rounded-2xl">
-  <span className="font-medium ">Booking Count:</span>{" "}
-  {car.booking_count || 0}
+                <p className="mt-3 flex font-bold  gap-3 bg-blue-50 p-2 rounded-2xl">
+  <span className="font-medium "><BookMarked></BookMarked></span>{" Booked by "}
+   { car.booking_count || <p className="font-bold">0</p>} {'user'}
 </p>
               </div>
 
