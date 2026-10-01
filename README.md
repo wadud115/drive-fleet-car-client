@@ -4,15 +4,15 @@ DriveFleet is a full-stack car rental platform where users can explore available
 
 ## 🌐 Live Website
 
-🔗 Live Site: `YOUR_LIVE_CLIENT_URL`
+🔗 Live Site: `https://drive-fleet-car.vercel.app`
 
 ## 📦 Client Repository
 
-🔗 GitHub: `YOUR_CLIENT_GITHUB_REPOSITORY_URL`
+🔗 GitHub: `https://github.com/wadud115/drive-fleet-car-client.git`
 
 ## ⚙️ Server Repository
 
-🔗 GitHub: `YOUR_SERVER_GITHUB_REPOSITORY_URL`
+🔗 GitHub: `https://github.com/wadud115/drive-fleet-car-server.git`
 
 ---
 
